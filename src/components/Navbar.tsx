@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Menu, X } from "lucide-react";
+import { Code2, Menu, X, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -13,6 +15,16 @@ const navLinks = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAuthClick = () => {
+    if (user) {
+      signOut();
+    } else {
+      navigate("/auth");
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-hero-overlay/95 backdrop-blur-md border-b border-white/10">
@@ -35,8 +47,19 @@ export const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Admin Login
+            <Button 
+              size="sm" 
+              onClick={handleAuthClick}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            >
+              {user ? (
+                <>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </>
+              ) : (
+                "Admin Login"
+              )}
             </Button>
           </div>
 
@@ -69,8 +92,22 @@ export const Navbar = () => {
                     {link.name}
                   </a>
                 ))}
-                <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground w-fit">
-                  Admin Login
+                <Button 
+                  size="sm" 
+                  onClick={() => {
+                    handleAuthClick();
+                    setIsOpen(false);
+                  }}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground w-fit"
+                >
+                  {user ? (
+                    <>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </>
+                  ) : (
+                    "Admin Login"
+                  )}
                 </Button>
               </div>
             </motion.div>
