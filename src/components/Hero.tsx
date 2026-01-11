@@ -74,16 +74,20 @@ export const Hero = () => {
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-semibold"
+              asChild
             >
-              Start Your Project
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <a href="#contact">
+                Start Your Project
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </a>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-white/50 bg-white/10 text-white hover:bg-white/20 px-8 py-6 text-base font-semibold backdrop-blur-sm"
+              asChild
             >
-              View Services
+              <a href="#services">View Services</a>
             </Button>
           </motion.div>
         </div>
