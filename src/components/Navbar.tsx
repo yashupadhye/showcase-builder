@@ -58,7 +58,7 @@ export const Navbar = () => {
                   Sign Out
                 </>
               ) : (
-                "Admin Login"
+                "Sign In"
               )}
             </Button>
           </div>
@@ -106,7 +106,7 @@ export const Navbar = () => {
                       Sign Out
                     </>
                   ) : (
-                    "Admin Login"
+                    "Sign In"
                   )}
                 </Button>
               </div>
